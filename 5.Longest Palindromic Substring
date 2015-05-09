@@ -1,0 +1,52 @@
+/**
+ *Given a string S, find the longest palindromic substring in S. You may assume that the maximum length of S is 1000, and there exists
+ *one unique longest palindromic substring.
+**/
+
+class Solution {
+public:
+	string longestPalindrome(string s) {
+		if (s.size() <= 1)
+			return s;
+		string str(s.size() * 2 + 3, '#');
+		str[0] = '~';
+		for (int i = 1, j = 0; i < str.size() - 1; ++i){
+			if (i % 2 == 0)
+				str[i] = s[j++];
+		}
+		str[str.size() - 1] = '^';
+		int p[2001] = { 0 };
+		int max = 0, di = 0, len = 0;
+		for (int i = 1; i < str.size() - 1; ++i){
+			if (i >= max){
+				di = i;
+				len = 1;
+				for (int j = 1;; ++j){
+					if (str[di + j] == str[di - j])
+						len++;
+					else break;
+				}
+				max = di + len;
+				p[i] = len;
+			}
+			else{
+				if ((i + p[di * 2 - i]) <= max)
+					p[i] = p[di * 2 - i];
+				else
+					p[i] = max - i;
+				while (str[i + p[i]] == str[i - p[i]]) ++p[i];
+				max = i + p[i];
+				di = i;
+			}
+		}
+		int maxlen = 0, maxindex = 0;
+		for (int i = 0; i<str.size() - 1; ++i){
+			if (p[i] > maxlen){
+				maxlen = p[i];
+				maxindex = i;
+			}
+		}
+		cout<<maxindex<<" "<<maxlen<<endl;
+		return s.substr(maxindex/2-maxlen/2,maxlen-1);
+	}
+};
