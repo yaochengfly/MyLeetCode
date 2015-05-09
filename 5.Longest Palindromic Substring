@@ -3,6 +3,11 @@
  *one unique longest palindromic substring.
 **/
 
+/**
+ *参考
+ * http://blog.csdn.net/suool/article/details/38383045
+ *方法四
+**/
 class Solution {
 public:
 	string longestPalindrome(string s) {
