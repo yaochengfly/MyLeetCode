@@ -11,5 +11,5 @@ LeetCode Answer
 |[6.ZigZag Conversion](https://leetcode.com/problems/zigzag-conversion/)|[C++](https://github.com/yaochengfly/MyLeetCode/blob/master/6.ZigZag%20Conversion)|
 |[7.Reverse Integer](https://leetcode.com/problems/reverse-integer/)|[C++](https://github.com/yaochengfly/MyLeetCode/blob/master/7.Reverse%20Integer)|
 |[8.String to Integer (atoi)](https://leetcode.com/problems/string-to-integer-atoi/)|[C++](https://github.com/yaochengfly/MyLeetCode/blob/master/8.String%20to%20Integer%20(atoi))|
-|[9.Palindrome Number](https://leetcode.com/problems/palindrome-number/)|[C++]()|
+|[9.Palindrome Number](https://leetcode.com/problems/palindrome-number/)|[C++](https://github.com/yaochengfly/MyLeetCode/blob/master/9.Palindrome%20Number)|
 |[100.Same Tree](https://leetcode.com/problems/same-tree/)|[C++](https://github.com/yaochengfly/MyLeetCode/blob/master/100.Same%20Tree)|
