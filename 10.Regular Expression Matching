@@ -1,0 +1,76 @@
+/**
+Implement regular expression matching with support for '.' and '*'.
+
+'.' Matches any single character.
+'*' Matches zero or more of the preceding element.
+
+The matching should cover the entire input string (not partial).
+
+The function prototype should be:
+bool isMatch(const char *s, const char *p)
+
+Some examples:
+isMatch("aa","a") → false
+isMatch("aa","aa") → true
+isMatch("aaa","aa") → false
+isMatch("aa", "a*") → true
+isMatch("aa", ".*") → true
+isMatch("ab", ".*") → true
+isMatch("aab", "c*a*b") → true
+**/
+
+/**
+
+			a    b    *    a    *    c    *    a
+		1   0    0    0    0    0    0    0    0
+	a	0	1	 0	  1    0    1    0    1    0
+	a	0	0    0    0    1    1    0    1    1
+	a	0   0    0    0    0    1    0    1    1
+	
+	如果当前是 *
+	不等时：
+		flag[i][j] = flag[i][j-2];
+	相等时：
+		flag[i][j]=(flag[i][j-2] || flag[i-1][j]);
+**/
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+    	int llen=s.size()+1;
+    	int rlen=p.size()+1;
+    	auto flag=new bool[100][100];
+    	for(int i=1;i<llen;++i)
+    		flag[i][0]=false;
+    	flag[0][0]=true;
+    	for(int j=1;j<rlen;++j){
+    		if(p[j-1] != '*')
+    			flag[0][j]=false;
+    		else{
+    			flag[0][j]=flag[0][j-2];
+			}
+		}
+		
+		for(int i=1;i<llen;++i){
+			for(int j=1;j<rlen;++j){
+				if(p[j-1] != '*'){
+					if(p[j-1] == s[i-1] || p[j-1] == '.')
+						flag[i][j]=flag[i-1][j-1];
+					else
+						flag[i][j]=false;
+				}
+				else{
+					if(p[j-2] == s[i-1] || p[j-2] == '.'){
+						flag[i][j]=(flag[i-1][j] || flag[i][j-2]);
+					}
+					else{
+						flag[i][j]=flag[i][j-2];
+					}
+					 
+				}
+			}
+		}
+		bool result=flag[llen-1][rlen-1];
+		delete[] flag;
+		return result;
+    }
+};
